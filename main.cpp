@@ -11,23 +11,20 @@ Github Repo Link: https://github.com/arjunq21/SnakeGame
 #include "Graph.h"
 #include "DirectionInput.h"
 
+#include <time.h>
+#include <cstdlib>
+#include <conio.h>
+#include <thread>
+
 
 main(){
 	srand(clock()) ;
+	DirectionInput::init() ;
+	// Direction Input Thread
+	thread DirectionInputListener( DirectionInput::listenInput );
 	Graph G ;
 	G.snake.addPart(Point(2, 2), d_right, s_tail ) ;
 	G.snake.addPart(Point(2, 3), d_right, s_head) ;
-//	G.snake.addPart(Point(2, 4), d_down) ;
-//	G.snake.addPart(Point(3, 4), d_down) ;
-//	G.snake.addPart(Point(4, 4), d_down) ;
-//	G.snake.addPart(Point(5, 4), d_right) ;
-//	G.snake.addPart(Point(5, 5), d_down) ;
-//	G.snake.addPart(Point(6, 5), d_down) ;
-//	G.snake.addPart(Point(7, 5), d_right) ;
-//	G.snake.addPart(Point(7, 6), d_right) ;
-//	G.snake.addPart(Point(7, 7), d_right) ;
-//	G.snake.addPart(Point(7, 8), d_right , s_head) ;
-//	G.snake.addPart(Point(5, 6), d_right , s_head) ;
 	cout << "Use arrow keys to move the snake.\n" ;
 	cout << "Press any key to start game,\n 'esc' to end game at any moment." ;
 	char input ;
@@ -72,6 +69,11 @@ main(){
 				cout << "\n\aAte food." ;
 			}
 			cout << "\n\t\tScore: " << score ;
+	}
+	//joining thread
+	if(DirectionInputListener.joinable()){
+		DirectionInputListener.join() ;
+		cout << "\nStopped Listening for Direction Input." ;
 	}
 }
 

@@ -2,15 +2,14 @@
 #define GLOBALS_H
 
 #include <iostream>
-#include <time.h>
-#include <cstdlib>
-#include <conio.h>
+
 
 using namespace std ;
 
 //for coordinate axes
 #define HEIGHT 10
 #define WIDTH 15
+#define DIRECTION_INPUT_LIMIT 3
 #define KEY_UP 72
 #define KEY_DOWN 80
 #define KEY_LEFT 75
