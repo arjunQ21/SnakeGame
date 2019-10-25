@@ -10,7 +10,7 @@ using namespace std ;
 class Graph{
 	string inputLetters[HEIGHT * WIDTH + 1] ;
 	public:
-
+	// friend void initSnake( Graph ) ;
 	static int height, width;
 	Snake snake;
 	Food food ;

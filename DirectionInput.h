@@ -75,6 +75,7 @@ class DirectionInput{
 				inputStack[i] = no_dir ;
 			}
 			inputStack[0] = d_right ;
+			pressedKey = 0 ;
 
 		}
 		static void stopListeningForInput(){

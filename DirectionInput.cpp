@@ -1,9 +1,9 @@
 #include "Globals.h"
 #include "DirectionInput.h"
 
-Direction DirectionInput::last = d_right ;
+Direction DirectionInput::last = no_dir ;
 int DirectionInput::stopListening = 0 ;
-char DirectionInput::pressedKey = 0 ;
+char DirectionInput::pressedKey = 27 ;
 Direction DirectionInput::inputStack[ DIRECTION_INPUT_LIMIT ] ;
 // int c = 0;
 // void showTime(){

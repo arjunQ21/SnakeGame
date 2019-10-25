@@ -29,4 +29,6 @@ int directionChangePossible( Direction from, Direction to) ;
 
 Direction oppositeDirectionOf( Direction dir) ;
 
+void initThings() ;
+
 #endif
