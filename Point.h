@@ -170,6 +170,7 @@ class Point{
 		int isInBorder(){
 			if(lineNo >= 0 && lineNo <= height + 1  && fromLeft >= 0 && fromLeft <= width + 1 ){
 				if(lineNo == 0 || lineNo == height + 1  || fromLeft == 0 || fromLeft == width + 1 ){
+					cout << "\nSnake hit the border." ;
 					return 1 ;
 				}
 				return 0 ;

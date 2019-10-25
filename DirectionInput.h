@@ -24,6 +24,10 @@ class DirectionInput{
 					return no_dir ;	
 			}
 		}
+	public:
+		static Direction last ;
+		static char pressedKey ;
+		static int stopListening ;
 		static string mapToWords( Direction dir){
 			switch( dir ){
 				case d_up:
@@ -40,33 +44,32 @@ class DirectionInput{
 					return "NONE" ;					
 			}
 		}
-	public:
 		static void listenInput(){
 			cout << "Listening for input." ;
 			while(stopListening != 1){
-				cout << "\nEnter Direction: " ;
-				pressedKey = getch();
-				if(pressedKey != 27){
-					processKeyPressed() ;
-				}else{
-					break ;
+				if(gameStarted){
+					// cout << "\nEnter Direction: " ;
+					pressedKey = getch();
+					if(pressedKey != 27){
+						processKeyPressed() ;
+					}else{
+						break ;
+					}
 				}
 			}
 		}
-		static Direction input, last ;
-		static char pressedKey ;
-		static int stopListening ;
 		static Direction get(){
 			if(inputStack[0] == Direction(no_dir)){
 				return last ;
 			}else{
-				return (last = inputStack[0]) ;
+				last = inputStack[0] ;
+				popFirstFromStack() ;
+				return last ;
 			}
-			popFirstFromStack() ;
 		}
 		static void init(){
 			stopListening = 0 ;
-			input = d_right ;
+			// input = d_right ;
 			last = d_right ;
 			for(int i = 0 ; i < DIRECTION_INPUT_LIMIT ; i++){
 				inputStack[i] = no_dir ;
@@ -78,22 +81,27 @@ class DirectionInput{
 			stopListening = 1 ;
 			cout << "\nPress any key to stop listening for direction input." ;
 		}
-		static void listen(){
-			thread inputListener( listenInput ) ;
-			if(inputListener.joinable()){
-				inputListener.join() ;
-				cout << "\nStopped Listening for direction input." ;
-			}
+		// static void listen(){
+		// 	thread inputListener( listenInput ) ;
+		// 	if(inputListener.joinable()){
+		// 		inputListener.join() ;
+		// 		cout << "\nStopped Listening for direction input." ;
+		// 	}
+		// }
+		static void processCustomInput( char c){
+			pressedKey = c ;
+			processKeyPressed() ;
 		}
 		static void processKeyPressed( ){
 			Direction pressedDirection = map( pressedKey ) ;
 			if(pressedDirection == Direction(no_dir)){
-				cout << "\ninvalid direction input '" << pressedKey << "' .\n";		
+				// cout << "\ninvalid direction input '" << pressedKey << "' .\n";		
+				// cout << "\a" ;
 			}else{
 				pushToStack( pressedDirection ) ;
-				cout << "\nDirection read from keyboard." ;
+				// cout << "\nDirection read from keyboard." ;
 			}
-			showStack() ;
+			// showStack() ;
 		}
 		static int filledUpto(){
 			int i ;
@@ -110,7 +118,7 @@ class DirectionInput{
 		static void pushToStack( Direction dir ){
 			if(emptyRoomsInStack() > 0){
 				inputStack[ filledUpto() + 1 ] = dir ;
-				cout << "\nDirection " << mapToWords(dir) << " pushed to stack." ;
+				// cout << "\nDirection " << mapToWords(dir) << " pushed to stack." ;
 			}else{
 				cout << "\nStack Full Error. Cannot add more than " << DIRECTION_INPUT_LIMIT << " inputs in stack." ;
 			}
@@ -120,7 +128,7 @@ class DirectionInput{
 				inputStack[ i ] = inputStack[ i + 1] ;
 			}
 			inputStack[ DIRECTION_INPUT_LIMIT - 1] = no_dir ;
-			cout << "\nPopped First from stack." ;
+			// cout << "\nPopped First from stack." ;
 		}
 		static void showStack(){
 			// just for now

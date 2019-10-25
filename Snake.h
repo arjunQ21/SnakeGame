@@ -62,6 +62,8 @@ class Snake{
 				tailAt = newTailAt ;
 			}else{
 				cout << "cant move in this direction.\n";
+				//so move in previous direction
+				moveOneStep(headAt.getDirection()) ;
 			}
 		}
 		int getLength(){
@@ -89,6 +91,7 @@ class Snake{
 			static int lastLength = getLength() ;
 //			cout << "\n Last len: " << lastLength << ", present len: " << getLength() ;
 			if(lastLength > getLength()){
+				cout << "\nSnake ate itself." ;
 				return 1 ;
 			}
 			lastLength = getLength() ;

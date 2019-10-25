@@ -1,7 +1,8 @@
 //definition of global variables and functions
 #include "Globals.h" 
 
-int updateInterval = 800 ;
+int updateInterval = 80 ;
+int gameStarted = 0 ;
 
 // Global arrays redeclarations
 SnakePart positions[ HEIGHT * WIDTH + 1] ;

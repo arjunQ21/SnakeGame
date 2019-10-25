@@ -1,10 +1,6 @@
 #include "Globals.h"
 #include "DirectionInput.h"
-// #include <time.h>
-// #include <thread>
-// #include <conio.h>
 
-Direction DirectionInput::input = d_right ;
 Direction DirectionInput::last = d_right ;
 int DirectionInput::stopListening = 0 ;
 char DirectionInput::pressedKey = 0 ;

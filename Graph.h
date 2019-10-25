@@ -20,7 +20,7 @@ class Graph{
 		Graph(){
 			height = HEIGHT ;
 			width = WIDTH ;
-			paddingLeft = 35 ;
+			paddingLeft = 25 ;
 			borderH = "=" ;
 			borderV = "||" ;
 			default_content = " " ;
@@ -80,7 +80,7 @@ class Graph{
 			if(Food::count % 5 == 0){
 				food.score = 5 ;
 			}
-			cout << "food ocunt: " << Food::count << ", food score: " << food.score ;
+			// cout << "food ocunt: " << Food::count << ", food score: " << food.score ;
 			if(food.score == 1){
 				foodStr = "o" ;
 			}else{

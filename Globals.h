@@ -3,13 +3,12 @@
 
 #include <iostream>
 
-
 using namespace std ;
 
 //for coordinate axes
-#define HEIGHT 10
-#define WIDTH 15
-#define DIRECTION_INPUT_LIMIT 3
+#define HEIGHT 15
+#define WIDTH 18
+#define DIRECTION_INPUT_LIMIT 6
 #define KEY_UP 72
 #define KEY_DOWN 80
 #define KEY_LEFT 75
@@ -20,7 +19,9 @@ enum SnakePart{ no_part, s_body, s_tail, s_head };
 //GLOBAL VARIABLES
 extern SnakePart positions[ HEIGHT * WIDTH + 1] ;
 extern Direction directions[ HEIGHT * WIDTH + 1] ;
+// update interval of snake movement in milliseconds
 extern int updateInterval ;
+extern int gameStarted ;
 
 // Function Declarations
 
