@@ -1,5 +1,5 @@
 /*
-Purano Main File
+Main File
 Snake Game in C++
 Written By: Arjun Adhikari
 Github Repo Link: https://github.com/arjunq21/SnakeGame
