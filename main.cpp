@@ -30,7 +30,7 @@ main(){
 	G.snake.addPart(Point(HEIGHT / 2, 3), d_right, s_head) ;
 	int score = 0 ;
 	G.plotSnake() ;
-	while(DirectionInput::pressedKey != 27){
+	while(DirectionInput::pressedKey != 27 && gameOver != 1){
 		if( clock() % updateInterval == 0){
 			G.snake.moveOneStep( DirectionInput::get() ) ;
 			G.plotSnake() ;

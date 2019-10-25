@@ -22,6 +22,7 @@ extern Direction directions[ HEIGHT * WIDTH + 1] ;
 // update interval of snake movement in milliseconds
 extern int updateInterval ;
 extern int gameStarted ;
+extern int gameOver ;
 
 // Function Declarations
 

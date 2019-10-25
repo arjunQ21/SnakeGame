@@ -1,1 +1,1 @@
-g++ -g -O -c main.cpp -std=c++11 -lpthread
+g++ -g -O -c Globals.cpp -std=c++11 -lpthread

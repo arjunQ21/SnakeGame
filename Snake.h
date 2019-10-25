@@ -92,6 +92,7 @@ class Snake{
 //			cout << "\n Last len: " << lastLength << ", present len: " << getLength() ;
 			if(lastLength > getLength()){
 				cout << "\nSnake ate itself." ;
+				gameOver = 1 ;
 				return 1 ;
 			}
 			lastLength = getLength() ;
