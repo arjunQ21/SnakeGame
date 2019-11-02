@@ -32,6 +32,10 @@ class Graph{
 			resetInputs() ;
 			resetDirections() ;
 		}
+		void resetParts(){
+			resetInputs() ;
+			resetDirections() ;
+		}
 		void showInputArray(){
 			int i ;
 			for(i = 1 ; i <= height * width ; i++){

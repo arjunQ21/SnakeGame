@@ -26,30 +26,43 @@ main(){
 	// Direction Input Thread
 	thread DirectionInputListener( DirectionInput::listenInput );
 	Graph G ;
-	G.snake.addPart(Point(HEIGHT / 2, 2), d_right, s_tail ) ;
-	G.snake.addPart(Point(HEIGHT / 2, 3), d_right, s_head) ;
-	int score = 0 ;
-	G.plotSnake() ;
-	while(DirectionInput::pressedKey != 27 && gameOver != 1){
-		if( clock() % updateInterval == 0){
-			G.snake.moveOneStep( DirectionInput::get() ) ;
-			G.plotSnake() ;
-			if(G.snake.ateItself() || G.snake.headAt.isInBorder()){
-				G.showCenteredText("Game Over!!") ;
-				cout << "\nYou died." ;
-				DirectionInput::stopListeningForInput() ;
-				break ;
-			}
-			// cout << "Food count: " << Food::count ;
-			if(G.snakeAteFood()){
-				score += G.food.score ;
+	int score ;
+	char playAgain = 'y' ;
+	while(playAgain == 'y' || playAgain =='Y'){
+		newStartedAt = clock() ;
+		G.resetParts() ;
+		G.snake.addPart(Point(HEIGHT / 2, 2), d_right, s_tail ) ;
+		G.snake.addPart(Point(HEIGHT / 2, 3), d_right, s_head) ;
+		score = 0 ;
+		G.plotSnake() ;
+		while(DirectionInput::pressedKey != 27 ){
+			if( clock() % updateInterval == 0){
+				G.snake.moveOneStep( DirectionInput::get() ) ;
 				G.plotSnake() ;
-				// cout << "\n\aAte food." ;
-				cout << "\a" ;
+				if(G.snake.ateItself() || G.snake.headAt.isInBorder()){
+					G.showCenteredText("Game Over!!") ;
+					showScore(score) ;
+					cout << "\nYou died." ;
+					cout << "Wanna Play Again? (y/n): " ;
+					playAgain = DirectionInput::newPressedKey() ;
+					G.snake.reset() ;
+					break ;
+				}
+				// cout << "Food count: " << Food::count ;
+				if(G.snakeAteFood()){
+					score += G.food.score ;
+					cout << "\a" ;
+					G.plotSnake() ;
+					// cout << "\n\aAte food." ;
+				}
+				showScore(score) ;			
 			}
-			cout << "\nScore: " << score << endl;			
 		}
+		// if(!(playAgain == 'y' || playAgain =='Y')){
+		// 	break ;
+		// }
 	}
+	DirectionInput::stopListeningForInput() ;
 	//joining thread
 	if(DirectionInputListener.joinable()){
 		DirectionInputListener.join() ;

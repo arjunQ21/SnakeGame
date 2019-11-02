@@ -23,6 +23,7 @@ extern Direction directions[ HEIGHT * WIDTH + 1] ;
 extern int updateInterval ;
 extern int gameStarted ;
 extern int gameOver ;
+extern int newStartedAt ;
 
 // Function Declarations
 
@@ -31,5 +32,7 @@ int directionChangePossible( Direction from, Direction to) ;
 Direction oppositeDirectionOf( Direction dir) ;
 
 void initThings() ;
+
+void showScore( int score = 0) ;
 
 #endif

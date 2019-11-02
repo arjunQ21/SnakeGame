@@ -4,22 +4,28 @@
 #include <iostream>
 #include "Globals.h"
 #include "Point.h"
+#include <time.h>
 using namespace std ;
 
 class Snake{
 	public:
-		int length = 3 ;
+		int length = 2 ;
 		Point headAt, tailAt ;
 //		Point activePoints[ HEIGHT * WIDTH + 1] ;
 		string  bodyLetter, tailLetter ;
 		Direction activeDirection = d_right ;
 		Snake(){
-			headAt = Point(5, 5) ;
-			tailAt = Point(5, 2) ;
-			resetParts() ;
 			bodyLetter = "*" ;
 			tailLetter = "+" ;
+			reset() ;
 //			addPart(Point(5, 2), Direction(d_right), SnakePart(s_tail)) ;
+		}
+		void reset(){
+			headAt = Point(5, 5) ;
+			tailAt = Point(5, 2) ;
+			resetParts() ;	
+			length = 2 ;	
+			// cout << "\nreset Snake." ;	
 		}
 		void removePart( Point at ){
 			directions[at.uniIndex] = Direction(no_dir) ;
@@ -27,14 +33,17 @@ class Snake{
 		}
 		void addPart( Point At, Direction dir, SnakePart part = s_body ){
 			if(At.isInsideBounds()){
-				if(!( part == SnakePart(no_part) || dir == Direction(no_dir))){
-					positions[ At.uniIndex ] = part ;
-					At.setDirection( dir ) ;
+				if(part == no_part){
+					cout << "No part data at " << At.toString("Point"," so cant add Part at this point.") <<".\n" ;
+					return ;					
+				}else if(dir == no_dir){
+					cout << "No direction data at " << At.toString("Point"," so cant add Part at this point.") <<".\n" ;
+					return ;					
 				}else{
-					cout << "Either direction or part is empty. Cant add this data at " << At.toString("Point") <<".\n" ;
-					return ;
+					positions[ At.uniIndex ] = part ;
+					At.setDirection( dir ) ;				
 				}
-//				Graph::setDirection(dir,  At ) ;
+//				Graph::setDirection(dir,  At ) ;	
 				if(part == SnakePart(s_head) ){
 					headAt = At ;
 				}
@@ -43,7 +52,7 @@ class Snake{
 				}
 				return ;
 			}
-			cout << ", so cant add part at this point.\n" ;
+			cout << ", so cant add Part at this point.\n" ;
 		}
 		void resetParts(){
 			int i ;
@@ -90,10 +99,11 @@ class Snake{
 		int ateItself(){
 			static int lastLength = getLength() ;
 //			cout << "\n Last len: " << lastLength << ", present len: " << getLength() ;
-			if(lastLength > getLength()){
-				cout << "\nSnake ate itself." ;
-				gameOver = 1 ;
-				return 1 ;
+			if((clock() - newStartedAt) > 1000 ){
+				if(lastLength > getLength()){
+					cout << "\nSnake ate itself." ;
+					return 1 ;
+				}				
 			}
 			lastLength = getLength() ;
 			return 0 ;

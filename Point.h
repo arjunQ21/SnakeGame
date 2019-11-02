@@ -136,8 +136,8 @@ class Point{
 						return a ;				
 				}
 			}
-			cout << ", So cant find any point ahead of " << a.toString("", ", so returning itself.\n") ;
-			return a ;
+			cout << ", So cant find any point ahead of " << a.toString("", ", so returning point at right of this point.\n") ;
+			return Point::atRightOf(a) ;
 		}
 		int hasValidDirection(){
 			if(getDirection() == Direction(no_dir)){

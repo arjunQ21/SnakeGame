@@ -27,7 +27,7 @@ class DirectionInput{
 	public:
 		static Direction last ;
 		static char pressedKey ;
-		static int stopListening ;
+		static int stopListening, haltThread ;
 		static string mapToWords( Direction dir){
 			switch( dir ){
 				case d_up:
@@ -44,16 +44,25 @@ class DirectionInput{
 					return "NONE" ;					
 			}
 		}
+		static char newPressedKey(){
+			haltThread = 1 ;
+			cout << "enter now: " ;
+			char a = getche() ;
+			haltThread = 0 ;
+			return a ;
+		}
 		static void listenInput(){
 			cout << "Listening for input." ;
 			while(stopListening != 1){
 				if(gameStarted){
-					// cout << "\nEnter Direction: " ;
-					pressedKey = getch();
-					if(pressedKey != 27){
-						processKeyPressed() ;
-					}else{
-						break ;
+					if(!haltThread){
+						// cout << "\nEnter Direction: " ;
+						pressedKey = getch();
+						if(pressedKey != 27){
+							processKeyPressed() ;
+						}else{
+							break ;
+						}
 					}
 				}
 			}

@@ -5,6 +5,7 @@ Direction DirectionInput::last = no_dir ;
 int DirectionInput::stopListening = 0 ;
 char DirectionInput::pressedKey = 27 ;
 Direction DirectionInput::inputStack[ DIRECTION_INPUT_LIMIT ] ;
+int DirectionInput::haltThread = 0 ;
 // int c = 0;
 // void showTime(){
 // 	int t = 0 ;
